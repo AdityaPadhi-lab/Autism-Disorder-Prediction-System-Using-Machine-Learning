@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 function App() {
 
@@ -31,80 +32,108 @@ function App() {
 
     try {
 
+      // BACKEND URL FROM VERCEL ENV VARIABLE
+      const API_URL = import.meta.env.VITE_API_URL;
+
       const response = await axios.post(
-        "http://127.0.0.1:5000/predict",
+        `${API_URL}/predict`,
         formData
       );
 
       setResult(response.data.prediction);
 
     } catch (error) {
+
       console.log(error);
+
+      setResult("Backend not connected");
+
     }
   };
-<div className="sidePanel">
 
-  <h1>
-    AI-Powered
-    <span> Autism Prediction</span>
-  </h1>
-
-  <p>
-    This intelligent healthcare system
-    predicts autism using machine
-    learning algorithms trained on
-    behavioral assessment patterns.
-  </p>
-
-  <div className="panelFeatures">
-
-    <div className="panelBox">
-      ⚡ Real-Time Prediction
-    </div>
-
-    <div className="panelBox">
-      🤖 AI-Based Analysis
-    </div>
-
-    <div className="panelBox">
-      🔒 Secure Assessment
-    </div>
-
-  </div>
-
-</div>
   return (
-    <div style={{ padding: "30px" }}>
 
-      <h1>Autism Detection System</h1>
+    <div className="container">
 
-      <form onSubmit={handleSubmit}>
+      {/* LEFT SIDE PANEL */}
 
-        {Object.keys(formData).map((key) => (
-          <div key={key} style={{ marginBottom: "10px" }}>
+      <div className="sidePanel">
 
-            <label>{key}</label>
+        <h1>
+          AI-Powered
+          <span> Autism Prediction</span>
+        </h1>
 
-            <input
-              type="number"
-              name={key}
-              value={formData[key]}
-              onChange={handleChange}
-              style={{ marginLeft: "10px" }}
-            />
+        <p>
+          This intelligent healthcare system
+          predicts autism using machine
+          learning algorithms trained on
+          behavioral assessment patterns.
+        </p>
 
+        <div className="panelFeatures">
+
+          <div className="panelBox">
+            ⚡ Real-Time Prediction
           </div>
-        ))}
 
-        <button type="submit">
-          Predict
-        </button>
+          <div className="panelBox">
+            🤖 AI-Based Analysis
+          </div>
 
-      </form>
+          <div className="panelBox">
+            🔒 Secure Assessment
+          </div>
 
-      <h2>{result}</h2>
+        </div>
+
+      </div>
+
+      {/* RIGHT SIDE FORM */}
+
+      <div className="formContainer">
+
+        <h1>Autism Detection System</h1>
+
+        <form onSubmit={handleSubmit}>
+
+          {Object.keys(formData).map((key) => (
+
+            <div
+              key={key}
+              style={{ marginBottom: "15px" }}
+            >
+
+              <label>{key}</label>
+
+              <input
+                type="number"
+                name={key}
+                value={formData[key]}
+                onChange={handleChange}
+                style={{
+                  marginLeft: "10px",
+                  padding: "8px",
+                  width: "100px"
+                }}
+              />
+
+            </div>
+
+          ))}
+
+          <button type="submit">
+            Predict
+          </button>
+
+        </form>
+
+        <h2>{result}</h2>
+
+      </div>
 
     </div>
+
   );
 }
 
