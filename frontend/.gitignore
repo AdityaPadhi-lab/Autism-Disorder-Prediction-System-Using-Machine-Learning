@@ -29,3 +29,11 @@ build/
 __pycache__/
 *.pyc
 .env
+
+.venv/
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.env
