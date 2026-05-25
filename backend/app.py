@@ -3,12 +3,7 @@ from flask_cors import CORS
 import pandas as pd
 import joblib
 
-<<<<<<< HEAD
-from flask_cors import CORS
-
-=======
 # INITIALIZE FLASK APP
->>>>>>> dad6725 (Updated Flask backend API)
 app = Flask(__name__)
 CORS(app)
 
