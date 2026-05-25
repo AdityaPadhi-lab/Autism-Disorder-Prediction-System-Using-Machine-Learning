@@ -48,30 +48,53 @@ function App() {
 
   const handleSubmit = async () => {
 
-    try {
+  try {
 
-      const response = await fetch(
-        "http://127.0.0.1:5000/predict",
-        {
-          method: "POST",
+    const API_URL = import.meta.env.VITE_API_URL;
 
-          headers: {
-            "Content-Type": "application/json",
-          },
+    // ADD REQUIRED BACKEND FIELDS
+    const finalData = {
+      ...formData,
 
-          body: JSON.stringify(formData),
-        }
-      );
+      gender: 1,
+      jaundice: 0,
+      austim: 0
+    };
 
-      const data = await response.json();
+    const response = await fetch(
+      `${API_URL}/predict`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(finalData),
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+    if (data.prediction) {
 
       setPrediction(data.prediction);
 
-    } catch (error) {
+    } else if (data.error) {
 
-      alert("Backend not connected");
+      setPrediction(`Error: ${data.error}`);
+
     }
-  };
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Backend not connected");
+  }
+};
 
   return (
 
