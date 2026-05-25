@@ -8,9 +8,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-app = Flask(__name__)
-CORS(app)
-
 # LOAD MODEL
 model = joblib.load("model/fresh_model.pkl")
 
