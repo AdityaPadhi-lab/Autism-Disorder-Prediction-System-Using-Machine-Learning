@@ -1,0 +1,49 @@
+
+
+We collected autism screening data, preprocessed it to remove inconsistencies, performed EDA to understand patterns, selected important features, trained a Logistic Regression model, optimized it using GridSearchCV, evaluated using multiple metrics, and finally saved the model for deployment.
+
+Metrics:
+
+accuracy_score → overall correctness
+precision_score → correctness of positive predictions
+recall_score → ability to catch positives
+f1_score → balance of precision & recall
+
+🧠 Models
+LogisticRegression
+Best for binary classification
+Fast + interpretable
+Needs scaling
+RandomForestClassifier (imported but not used here)
+Ensemble model (many trees)
+Handles non-linearity well
+⚙️ Preprocessing tools
+LabelEncoder
+Converts text → numbers
+Example: Male=1, Female=0
+StandardScaler
+Normalizes features (mean=0, std=1)
+Needed for gradient-based models (like LR)
+PowerTransformer
+
+Fixes skewed data → makes it more Gaussian
+
+👉 Why important?
+Most ML models assume normal distribution
+
+🎯 Feature selection
+SelectKBest(f_classif)
+Picks top K important features using ANOVA test
+
+👉 Why?
+
+Reduce noise
+Improve performance
+Avoid overfitting
+
+11. MODEL EVALUATION
+Metrics:
+Accuracy = (TP+TN)/Total
+Precision = TP/(TP+FP) → “How correct when predicting YES?”
+Recall = TP/(TP+FN) → “How many YES we captured?”
+F1 = balance
